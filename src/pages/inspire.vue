@@ -6,9 +6,28 @@
       class="mb-5"
     ><br>
     <vue-typer text="PortFolio" />
+    <div class="rellax">
+      Hello
+    </div>
+    <div>world</div>
+    <div>Thank you</div>
     <footer />
   </div>
 </template>
+
+<script>
+
+// import VueRellax from 'vue-rellax'
+
+export default {
+  mounted () {
+    // const VueRellax = new VueRellax('.rellax', { options })
+  },
+  rellax: {
+    speed: -1
+  }
+}
+</script>
 
 <style scoped>
 

@@ -2,6 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   mode: 'universal',
+  srcDir: 'src/',
   /*
   ** Headers of the page
   */
@@ -33,7 +34,8 @@ export default {
     {
       src: '~/plugins/vueTyper.js',
       ssr: false
-    }
+    },
+    // { src: 'node_modules/vue-rellax/lib/nuxt-plugin', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -61,7 +63,7 @@ export default {
   ** https://github.com/nuxt-community/vuetify-module
   */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~src/assets/variables.scss'],
     theme: {
       dark: false,
       themes: {
