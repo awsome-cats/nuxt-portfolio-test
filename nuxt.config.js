@@ -1,8 +1,32 @@
 import colors from 'vuetify/es5/util/colors'
+// eslint-disable-next-line nuxt/no-cjs-in-config
+const webpack = require('webpack')
+
+// path
+const baseUrl = process.env.BASE_URL || 'http://localhost:3000'
+const baseDir = process.env.BASE_DIR || '/'
+const basePath = baseUrl + baseDir
+
+// meta
+const lang = 'ja'
+const siteName = '株式会社ミューコス'
+const siteDesc = '共通のディスクリプション'
+const siteKeywords = '１つ目,２つ目,３つ目,４つ目'
+
+// images
+const iconImages = baseDir + 'img/icons/'
+const ogpImages = basePath + 'img/ogp/'
+
+// pwa
+const shortName = 'ミューコス'
+const splashscreens = baseDir + 'img/splashscreens'
 
 export default {
   mode: 'universal',
   srcDir: 'src/',
+  router: {
+    base: baseDir, // 忘れない
+  },
   /*
   ** Headers of the page
   */
@@ -35,7 +59,12 @@ export default {
       src: '~/plugins/vueTyper.js',
       ssr: false
     },
-    // { src: 'node_modules/vue-rellax/lib/nuxt-plugin', ssr: false }
+    {
+      src: '~/plugins/aos.js', ssr: false
+    },
+    '~/plugins/vue-scrollto.js',
+    '~/plugins/vue-rellax.js',
+
   ],
   /*
   ** Nuxt.js dev-modules
@@ -50,7 +79,13 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['@nuxtjs/pwa', { icon: false }],
+    // ['@nuxtjs/google-analytics', { id: 'UA-XXXXXX-X' }],
+    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/google-tag-manager
+    // ['@nuxtjs/google-tag-manager', { id: 'GTM-XXXXXXX' }],
+    // Doc: https://github.com/nuxt-community/sitemap-module
+    // '@nuxtjs/sitemap'
   ],
   /*
   ** Axios module configuration
@@ -63,7 +98,7 @@ export default {
   ** https://github.com/nuxt-community/vuetify-module
   */
   vuetify: {
-    customVariables: ['~src/assets/variables.scss'],
+    customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: false,
       themes: {
@@ -83,6 +118,11 @@ export default {
   ** Build configuration
   */
   build: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        _: 'lodash'
+      })
+    ],
     /*
     ** You can extend webpack config here
     */
